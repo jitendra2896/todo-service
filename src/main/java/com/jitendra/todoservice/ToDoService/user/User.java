@@ -3,8 +3,8 @@ package com.jitendra.todoservice.ToDoService.user;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 public class User {
@@ -15,7 +15,7 @@ public class User {
 	private String lastName;
 	private String email;
 	
-	@JsonIgnore
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private String password;
 	
 	public User() {}
@@ -70,4 +70,10 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
+	}
+	
 }
