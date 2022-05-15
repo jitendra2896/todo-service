@@ -1,10 +1,15 @@
 package com.jitendra.todoservice.ToDoService.user;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.jitendra.todoservice.ToDoService.todo.Todo;
 
 @Entity
 public class User {
@@ -14,6 +19,9 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String email;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Todo> todos;
 	
 	@JsonProperty(access=Access.WRITE_ONLY)
 	private String password;
@@ -69,6 +77,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public List<Todo> getTodos() {
+		return todos;
+	}
+
+	public void setTodos(List<Todo> todos) {
+		this.todos = todos;
 	}
 
 	@Override
